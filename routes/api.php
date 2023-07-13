@@ -31,3 +31,8 @@ Route::post('/Services', 'App\Http\Controllers\ServiceController@store');
 Route::get('/Services/{service}', 'App\Http\Controllers\ServiceController@show');
 Route::put('/Services/{service}', 'App\Http\Controllers\ServiceController@update');
 Route::delete('/Services/{service}', 'App\Http\Controllers\ServiceController@destroy');
+
+//Route pivot
+Route::post('/Clients/service', 'App\Http\Controllers\ClientController@attach');
+Route::post('/Clients/service/detach', 'App\Http\Controllers\ClientController@detach');
+Route::post('/Services/clients', 'App\Http\Controllers\ServiceController@clients');
