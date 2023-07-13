@@ -13,15 +13,10 @@ class ServiceController extends Controller
     public function index()
     {
         //
+        $Services = Service::all();
+        return response()->json($Services);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,6 +24,19 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         //
+        //Create Client
+        $Services = new Service();
+        $Services->name = $request->name;
+        $Services->description = $request->description;
+        $Services->price = $request->price;
+        $Services->save();
+
+        $data = [
+            'message' => 'Service created successfully',
+            'Service' => $Services
+        ];
+        
+        return response()->json($data);
     }
 
     /**
@@ -37,14 +45,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Service $service)
-    {
-        //
+        return response()->json($service);
     }
 
     /**
@@ -53,6 +54,18 @@ class ServiceController extends Controller
     public function update(Request $request, Service $service)
     {
         //
+
+        $service->name = $request->name;
+        $service->description = $request->description;
+        $service->price = $request->price;
+        $service->save();
+
+        $data = [
+            'message' => 'Service updated successfully',
+            'Service' => $service
+        ];
+        
+        return response()->json($data);
     }
 
     /**
@@ -61,5 +74,12 @@ class ServiceController extends Controller
     public function destroy(Service $service)
     {
         //
+        $service->delete();
+        $data = [
+            'message' => 'Service deleted successfully',
+            'service' => $service
+        ];
+        return response()->json($data);
+
     }
 }
