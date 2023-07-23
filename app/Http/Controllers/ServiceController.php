@@ -16,8 +16,7 @@ class ServiceController extends Controller
         $Services = Service::all();
         return response()->json($Services);
     }
-
-
+    
     /**
      * Store a newly created resource in storage.
      */
